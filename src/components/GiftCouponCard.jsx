@@ -4,8 +4,14 @@ import { useCartStore } from "../stores/useCartStore";
 
 const GiftCouponCard = () => {
   const [userInputCode, setUserInputCode] = useState("");
-  const { coupon, isCouponApplied, applyCoupon, getMyCoupon, removeCoupon } =
-    useCartStore();
+  const {
+    coupon,
+    isCouponApplied,
+    applyCoupon,
+    getMyCoupon,
+    removeCoupon,
+    coupons,
+  } = useCartStore();
 
   useEffect(() => {
     getMyCoupon();
@@ -23,6 +29,10 @@ const GiftCouponCard = () => {
   const handleRemoveCoupon = async () => {
     await removeCoupon();
     setUserInputCode("");
+  };
+
+  const handleSelectCoupon = (code) => {
+    applyCoupon(code);
   };
 
   return (
@@ -63,6 +73,8 @@ const GiftCouponCard = () => {
           Apply Code
         </motion.button>
       </div>
+
+      {/* Display applied coupon */}
       {isCouponApplied && coupon && (
         <div className="mt-4">
           <h3 className="text-lg font-medium text-gray-300">Applied Coupon</h3>
@@ -85,17 +97,36 @@ const GiftCouponCard = () => {
         </div>
       )}
 
-      {coupon && (
-        <div className="mt-4">
-          <h3 className="text-lg font-medium text-gray-300">
-            Your Available Coupon:
-          </h3>
-          <p className="mt-2 text-sm text-gray-400">
-            {coupon.code} - {coupon.discountPercentage}% off
-          </p>
-        </div>
-      )}
+      {/* Display available coupons */}
+      <div className="mt-4">
+        <h3 className="text-lg font-medium text-gray-300">
+          Available Coupons:
+        </h3>
+        <ul className="space-y-2 mt-2 text-sm text-gray-400">
+          {coupons?.map((availableCoupon) => (
+            <li
+              key={availableCoupon.code}
+              className="flex justify-between items-center"
+            >
+              <span>
+                {availableCoupon.code} - {availableCoupon.discountPercentage}%
+                off
+              </span>
+              <motion.button
+                type="button"
+                className="text-sm font-medium text-emerald-400 hover:text-emerald-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleSelectCoupon(availableCoupon.code)}
+              >
+                Select
+              </motion.button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </motion.div>
   );
 };
+
 export default GiftCouponCard;
