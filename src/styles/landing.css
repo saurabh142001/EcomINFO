@@ -1,0 +1,165 @@
+/* Container */
+.profile-section {
+  color: rgb(72, 207, 162);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Container for the Image and Content */
+.profile-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Left Image */
+.profile-picture {
+  width: 45%; /* Takes up left half */
+  height: 100%;
+  object-fit: cover;
+  border-radius: 40px;
+}
+
+/* Content Container */
+.profile-content {
+  color: var(--text-color);
+  position: relative;
+  width: 50%; /* Right half */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* Title Styling */
+.profile-title {
+  font-family: "YourCustomFont", serif;
+  font-size: 3.5rem;
+  font-weight: bold;
+  line-height: 1.2;
+  position: relative;
+  left: -12%; /* Overlaps image by 10% */
+  z-index: 1; /* Ensures it appears on top of the image */
+  color: var(--text-color);
+}
+
+/* Paragraph Styling */
+.profile-text {
+  color: var(--text-color);
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  /* Stack image and content vertically on smaller screens */
+  .profile-container {
+    padding: 15px;
+    flex-direction: column; /* Stack vertically */
+    height: auto; /* Allow height to adjust */
+  }
+
+  /* Adjust the image size */
+  .profile-picture {
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 20px; /* Slightly smaller border radius */
+  }
+
+  /* Adjust content width */
+  .profile-content {
+    width: 100%; /* Full width */
+    padding: 1rem; /* Adjust padding */
+  }
+
+  /* Adjust title size */
+  .profile-title {
+    font-size: 2.5rem; /* Smaller font size */
+    left: 0; /* Center title */
+  }
+
+  /* Adjust paragraph size */
+  .profile-text {
+    font-size: 1rem; /* Smaller font size */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further adjustments for very small screens */
+  .profile-title {
+    font-size: 2rem; /* Even smaller title */
+  }
+
+  .profile-text {
+    font-size: 0.9rem; /* Even smaller text */
+  }
+
+  .profile-content {
+    padding: 0.5rem; /* Minimal padding */
+  }
+}
+
+/* Keyframes for slide-in animation */
+@keyframes slide-in {
+  0% {
+    transform: translate(
+      -100%,
+      20%
+    ); /* Start from the left and slightly lower */
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0); /* Move to original position */
+    opacity: 1;
+  }
+}
+
+/* Animation classes */
+.profile-title {
+  animation: slide-in 1s ease-out forwards; /* Title slide-in animation */
+}
+
+.profile-picture {
+  animation: slide-in 1s ease-out forwards;
+  animation-delay: 0.5s; /* Delay for image */
+}
+
+.profile-text {
+  animation: slide-in 1s ease-out forwards;
+  animation-delay: 1s; /* Delay for text */
+}
+.animated-gradient {
+  background: linear-gradient(
+    45deg,
+    #b20c28,
+    #8a1786,
+    #ffffff,
+    #eb2f48,
+    #ff7621,
+    #ffef63
+  );
+  background-size: 300% 300%;
+  animation: gradientAnimation 5s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text; /* For Firefox */
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.color-black {
+  color: rgb(244, 255, 239);
+}
